@@ -11,6 +11,7 @@ targets:
       CODE_SIGNING_ALLOWED: NO
       CODE_SIGNING_REQUIRED: NO
       PRODUCT_BUNDLE_IDENTIFIER: com.mehmet.kombin
+      GENERATE_INFOPLIST_FILE: NO
     info:
       path: Kombin/Info.plist
       properties:
