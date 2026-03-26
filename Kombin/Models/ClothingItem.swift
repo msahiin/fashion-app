@@ -16,7 +16,6 @@ final class ClothingItem {
     var isFavorite: Bool
     var wearCount: Int
     var lastWornDate: Date?
-    var purchasePrice: Double?
     var createdAt: Date
     
     @Relationship(deleteRule: .nullify, inverse: \OutfitItem.clothingItem)
@@ -35,7 +34,6 @@ final class ClothingItem {
         isFavorite: Bool = false,
         wearCount: Int = 0,
         lastWornDate: Date? = nil,
-        purchasePrice: Double? = nil,
         createdAt: Date = .now
     ) {
         self.name = name
@@ -50,7 +48,6 @@ final class ClothingItem {
         self.isFavorite = isFavorite
         self.wearCount = wearCount
         self.lastWornDate = lastWornDate
-        self.purchasePrice = purchasePrice
         self.createdAt = createdAt
     }
     

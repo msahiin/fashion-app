@@ -6,6 +6,8 @@ struct StatsView: View {
     @Query private var items: [ClothingItem]
     @Query(sort: \CalendarEntry.date, order: .reverse) private var entries: [CalendarEntry]
     @State private var timeFilter: TimeFilter = .month
+    @StateObject private var subscriptionManager = SubscriptionManager.shared
+    @State private var showPremiumGate = false
     
     enum TimeFilter: String, CaseIterable {
         case month = "Bu Ay"
@@ -47,8 +49,10 @@ struct StatsView: View {
         filteredItems.filter { $0.wearCount == 0 }
     }
     
-    private var totalValue: Double {
-        filteredItems.compactMap { $0.purchasePrice }.reduce(0, +)
+    private var wardrobeUtilization: Double {
+        guard !filteredItems.isEmpty else { return 0 }
+        let wornCount = filteredItems.filter { $0.wearCount > 0 }.count
+        return Double(wornCount) / Double(filteredItems.count) * 100
     }
     
     var body: some View {
@@ -79,10 +83,8 @@ struct StatsView: View {
                         )
                     }
                     
-                    // Total value
-                    if totalValue > 0 {
-                        totalValueCard
-                    }
+                    // Wardrobe Utilization (Premium)
+                    wardrobeUtilizationCard
                 }
                 .padding(.horizontal, AppTheme.Spacing.xl)
                 .padding(.vertical, AppTheme.Spacing.lg)
@@ -90,6 +92,9 @@ struct StatsView: View {
             .background(AppTheme.Colors.background)
             .navigationTitle("İstatistikler")
             .navigationBarTitleDisplayMode(.large)
+            .sheet(isPresented: $showPremiumGate) {
+                PremiumGateView()
+            }
         }
     }
     
@@ -221,25 +226,68 @@ struct StatsView: View {
         }
     }
     
-    // MARK: - Total Value
+    // MARK: - Wardrobe Utilization
     
-    private var totalValueCard: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Gardırop Değeri")
-                    .font(AppTheme.Typography.caption1)
-                    .foregroundColor(AppTheme.Colors.textSecondary)
-                Text("₺\(String(format: "%.0f", totalValue))")
-                    .font(AppTheme.Typography.title2)
-                    .foregroundColor(AppTheme.Colors.textPrimary)
+    private var wardrobeUtilizationCard: some View {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+            Text("Dolap Kullanım Oranı")
+                .font(AppTheme.Typography.headline)
+                .foregroundColor(AppTheme.Colors.textPrimary)
+            
+            if subscriptionManager.isPremium {
+                HStack(spacing: AppTheme.Spacing.xl) {
+                    // Circular progress
+                    ZStack {
+                        Circle()
+                            .stroke(AppTheme.Colors.border, lineWidth: 8)
+                        
+                        Circle()
+                            .trim(from: 0, to: CGFloat(wardrobeUtilization) / 100)
+                            .stroke(Color.yellow, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                            .rotationEffect(.degrees(-90))
+                        
+                        Text("\(Int(wardrobeUtilization))%")
+                            .font(AppTheme.Typography.headline)
+                            .foregroundColor(AppTheme.Colors.textPrimary)
+                    }
+                    .frame(width: 80, height: 80)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(wardrobeUtilization > 50 ? "Harika Gidiyorsun!" : "Daha Fazla Çeşit Deneyebilirsin")
+                            .font(AppTheme.Typography.subheadline)
+                            .foregroundColor(AppTheme.Colors.textPrimary)
+                        
+                        Text("Kıyafetlerinizin %\(Int(wardrobeUtilization))'ini en az bir kez giydiniz.")
+                            .font(AppTheme.Typography.caption1)
+                            .foregroundColor(AppTheme.Colors.textSecondary)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(AppTheme.Spacing.md)
+                .background(AppTheme.Colors.elevatedBackground)
+                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+            } else {
+                // Premium Lock
+                Button(action: { showPremiumGate = true }) {
+                    HStack {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(.yellow)
+                        VStack(alignment: .leading) {
+                            Text("Gelişmiş Analizler Kilitli")
+                                .font(AppTheme.Typography.subheadline)
+                            Text("Dolap kullanım oranını görmek için PRO'ya geçin.")
+                                .font(AppTheme.Typography.caption2)
+                        }
+                        Spacer()
+                    }
+                    .padding(AppTheme.Spacing.md)
+                    .background(AppTheme.Colors.elevatedBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+                }
+                .foregroundColor(AppTheme.Colors.textPrimary)
             }
-            Spacer()
-            Image(systemName: "chart.line.uptrend.xyaxis")
-                .font(.system(size: 28, weight: .ultraLight))
-                .foregroundColor(AppTheme.Colors.textTertiary)
         }
-        .padding(AppTheme.Spacing.lg)
-        .cardStyle()
     }
     
     // MARK: - Helpers

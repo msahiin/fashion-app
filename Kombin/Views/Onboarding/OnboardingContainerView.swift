@@ -5,7 +5,6 @@ struct OnboardingContainerView: View {
     @State private var currentStep: OnboardingStep = .welcome
     @State private var userName: String = ""
     @State private var gender: Gender = .other
-    @State private var birthYear: Int = 2000
     @State private var selectedStyles: [StylePreference] = []
     
     @Environment(\.modelContext) private var modelContext
@@ -41,7 +40,6 @@ struct OnboardingContainerView: View {
                 ProfileSetupView(
                     name: $userName,
                     gender: $gender,
-                    birthYear: $birthYear,
                     onContinue: { nextStep() }
                 )
                 .tag(OnboardingStep.profile)
@@ -77,7 +75,6 @@ struct OnboardingContainerView: View {
         let user = User(
             name: userName,
             gender: gender,
-            birthYear: birthYear,
             selectedStyles: selectedStyles
         )
         modelContext.insert(user)

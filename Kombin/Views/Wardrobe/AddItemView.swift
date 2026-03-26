@@ -14,7 +14,6 @@ struct AddItemView: View {
     @State private var brand: String = ""
     @State private var notes: String = ""
     @State private var imageData: Data?
-    @State private var purchasePrice: String = ""
     @State private var isRemovingBG: Bool = false
     
     @State private var showImagePicker = false
@@ -59,9 +58,6 @@ struct AddItemView: View {
                         text: $brand,
                         placeholder: "Zara, H&M..."
                     )
-                    
-                    // Price
-                    priceField
                     
                     // Notes
                     formField(
@@ -308,35 +304,6 @@ struct AddItemView: View {
                 )
         }
     }
-    
-    // MARK: - Price Field
-    
-    private var priceField: some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text("Fiyat")
-                .font(AppTheme.Typography.subheadline)
-                .foregroundColor(AppTheme.Colors.textSecondary)
-            
-            HStack {
-                Text("₺")
-                    .font(AppTheme.Typography.body)
-                    .foregroundColor(AppTheme.Colors.textSecondary)
-                TextField("0", text: $purchasePrice)
-                    .font(AppTheme.Typography.body)
-                    .keyboardType(.decimalPad)
-                    .foregroundColor(AppTheme.Colors.textPrimary)
-            }
-            .padding(.vertical, AppTheme.Spacing.md)
-            .padding(.horizontal, AppTheme.Spacing.lg)
-            .background(AppTheme.Colors.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
-            .overlay(
-                RoundedRectangle(cornerRadius: AppTheme.Radius.sm)
-                    .stroke(AppTheme.Colors.border, lineWidth: 1)
-            )
-        }
-    }
-    
     // MARK: - BG Removal
     
     private func removeBG() {
@@ -348,6 +315,15 @@ struct AddItemView: View {
                 await MainActor.run {
                     imageData = result
                     isRemovingBG = false
+                    
+                    // Auto color extraction
+                    if let uiImage = UIImage(data: result),
+                       let closestHex = uiImage.closestPresetHexColor(from: presetColors) {
+                        // Add a small animation to highlight the color change
+                        withAnimation {
+                            selectedColorHex = closestHex
+                        }
+                    }
                 }
             } catch {
                 await MainActor.run {
@@ -382,8 +358,7 @@ struct AddItemView: View {
             style: selectedStyle,
             brand: brand,
             notes: notes,
-            imageData: imageData,
-            purchasePrice: Double(purchasePrice)
+            imageData: imageData
         )
         modelContext.insert(item)
         dismiss()

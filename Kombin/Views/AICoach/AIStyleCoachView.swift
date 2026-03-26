@@ -7,6 +7,8 @@ struct AIStyleCoachView: View {
     @State private var messages: [ChatMessage] = []
     @State private var inputText: String = ""
     @State private var isLoading: Bool = false
+    @StateObject private var subscriptionManager = SubscriptionManager.shared
+    @State private var showPremiumGate = false
     
     struct ChatMessage: Identifiable {
         let id = UUID()
@@ -25,61 +27,88 @@ struct AIStyleCoachView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                // Chat messages
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        LazyVStack(spacing: AppTheme.Spacing.md) {
-                            // Welcome message
-                            if messages.isEmpty {
-                                welcomeMessage
-                            }
-                            
-                            ForEach(messages) { message in
-                                chatBubble(message)
-                                    .id(message.id)
-                            }
-                            
-                            if isLoading {
-                                HStack {
-                                    loadingIndicator
-                                    Spacer()
+            if subscriptionManager.isPremium {
+                VStack(spacing: 0) {
+                    // Chat messages
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            LazyVStack(spacing: AppTheme.Spacing.md) {
+                                // Welcome message
+                                if messages.isEmpty {
+                                    welcomeMessage
                                 }
-                                .padding(.horizontal, AppTheme.Spacing.xl)
+                                
+                                ForEach(messages) { message in
+                                    chatBubble(message)
+                                        .id(message.id)
+                                }
+                                
+                                if isLoading {
+                                    HStack {
+                                        loadingIndicator
+                                        Spacer()
+                                    }
+                                    .padding(.horizontal, AppTheme.Spacing.xl)
+                                }
+                            }
+                            .padding(.vertical, AppTheme.Spacing.lg)
+                        }
+                        .onChange(of: messages.count) { _, _ in
+                            if let last = messages.last {
+                                withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
                             }
                         }
-                        .padding(.vertical, AppTheme.Spacing.lg)
                     }
-                    .onChange(of: messages.count) { _, _ in
-                        if let last = messages.last {
-                            withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
-                        }
-                    }
+                    
+                    Divider()
+                    
+                    // Quick chips
+                    quickChips
+                    
+                    // Input bar
+                    inputBar
                 }
-                
-                Divider()
-                
-                // Quick chips
-                quickChips
-                
-                // Input bar
-                inputBar
+                .background(AppTheme.Colors.background)
+                .navigationTitle("AI Stil Koçu")
+                .navigationBarTitleDisplayMode(.inline)
+            } else {
+                premiumLockOverlay
             }
-            .background(AppTheme.Colors.background)
-            .navigationTitle("AI Stil Koçu")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("PRO")
-                        .font(AppTheme.Typography.caption2)
-                        .fontWeight(.bold)
-                        .foregroundColor(AppTheme.Colors.buttonText)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 2)
-                        .background(AppTheme.Colors.buttonFill)
-                        .clipShape(Capsule())
-                }
+        }
+    }
+    
+    // MARK: - Premium Lock
+    private var premiumLockOverlay: some View {
+        VStack(spacing: AppTheme.Spacing.lg) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 64))
+                .foregroundColor(.yellow)
+            
+            Text("AI Stil Koçu")
+                .font(AppTheme.Typography.title1)
+                .foregroundColor(AppTheme.Colors.textPrimary)
+            
+            Text("Sana özel olarak eğitilmiş Kombin AI ile anında sohbet et, gardırobundaki parçalara göre en iyi önerileri al ve her gün harika görün.")
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, AppTheme.Spacing.xl)
+            
+            Button("Sınırsız Sohbeti Başlat") {
+                showPremiumGate = true
             }
+            .font(AppTheme.Typography.headline)
+            .foregroundColor(AppTheme.Colors.buttonText)
+            .padding(.horizontal, 32)
+            .padding(.vertical, 16)
+            .background(AppTheme.Colors.buttonFill)
+            .clipShape(Capsule())
+            .padding(.top, AppTheme.Spacing.lg)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppTheme.Colors.background)
+        .sheet(isPresented: $showPremiumGate) {
+            PremiumGateView()
         }
     }
     
@@ -248,34 +277,30 @@ struct AIStyleCoachView: View {
         inputText = ""
         isLoading = true
         
-        // Simulate AI response (replace with OpenAI API call)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            let suggestion = generateLocalSuggestion(for: text)
-            isLoading = false
-            messages.append(suggestion)
+        Task {
+            await fetchAIResponse(for: text)
         }
     }
     
-    private func generateLocalSuggestion(for query: String) -> ChatMessage {
-        // Rule-based suggestion engine (offline fallback)
-        let randomOutfit = outfits.randomElement()
+    private func fetchAIResponse(for text: String) async {
+        let history = messages.map { ["role": $0.isUser ? "user" : "assistant", "content": $0.text] }
         
-        let lowerQuery = query.lowercased()
-        var response = ""
-        
-        if lowerQuery.contains("iş") || lowerQuery.contains("toplantı") || lowerQuery.contains("work") {
-            response = "İş toplantısı için klasik bir kombin öneriyorum. Şık ama rahat görüneceksin:"
-        } else if lowerQuery.contains("akşam") || lowerQuery.contains("yemek") || lowerQuery.contains("dinner") {
-            response = "Akşam yemeği için zarif bir seçim yaptım. Şıklığınla fark yaratacaksın:"
-        } else if lowerQuery.contains("spor") || lowerQuery.contains("gym") {
-            response = "Spor için rahat ve hareketli bir kombin:"
-        } else if lowerQuery.contains("bugün") || lowerQuery.contains("today") {
-            response = "Bugünkü hava durumuna göre rahat ve şık bir öneri:"
-        } else {
-            response = "Sana uygun bir kombin buldum, gardırobundaki parçalardan:"
+        do {
+            let response = try await AIService.shared.fetchResponse(messages: history)
+            
+            // Randomly attach a local outfit for wow factor since function-calling isn't active
+            let randomOutfit = outfits.randomElement()
+            
+            await MainActor.run {
+                isLoading = false
+                messages.append(ChatMessage(text: response, isUser: false, suggestedOutfit: randomOutfit))
+            }
+        } catch {
+            await MainActor.run {
+                isLoading = false
+                messages.append(ChatMessage(text: error.localizedDescription, isUser: false))
+            }
         }
-        
-        return ChatMessage(text: response, isUser: false, suggestedOutfit: randomOutfit)
     }
 }
 

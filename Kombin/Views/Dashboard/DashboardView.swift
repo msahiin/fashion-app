@@ -6,6 +6,8 @@ struct DashboardView: View {
     @Query(sort: \CalendarEntry.date, order: .reverse) private var calendarEntries: [CalendarEntry]
     @Query private var outfits: [Outfit]
     
+    @StateObject private var locationManager = LocationManager()
+    
     private var currentUser: User? { users.first }
     
     private var greeting: LocalizedStringKey {
@@ -60,6 +62,9 @@ struct DashboardView: View {
                     }
                 }
             }
+            .onAppear {
+                locationManager.requestLocation()
+            }
         }
     }
     
@@ -80,19 +85,21 @@ struct DashboardView: View {
             Spacer()
             
             // Weather badge
-            HStack(spacing: 4) {
-                Text("18°C")
-                    .font(AppTheme.Typography.caption1)
-                Image(systemName: "sun.max.fill")
-                    .font(AppTheme.Typography.caption1)
+            if !locationManager.currentCity.isEmpty {
+                HStack(spacing: 4) {
+                    Text("\(locationManager.currentCity), \(locationManager.temperature)°C")
+                        .font(AppTheme.Typography.caption1)
+                    Image(systemName: locationManager.weatherIcon)
+                        .font(AppTheme.Typography.caption1)
+                }
+                .foregroundColor(AppTheme.Colors.textSecondary)
+                .padding(.horizontal, AppTheme.Spacing.md)
+                .padding(.vertical, AppTheme.Spacing.xs)
+                .overlay(
+                    Capsule()
+                        .stroke(AppTheme.Colors.border, lineWidth: 1)
+                )
             }
-            .foregroundColor(AppTheme.Colors.textSecondary)
-            .padding(.horizontal, AppTheme.Spacing.md)
-            .padding(.vertical, AppTheme.Spacing.xs)
-            .overlay(
-                Capsule()
-                    .stroke(AppTheme.Colors.border, lineWidth: 1)
-            )
         }
     }
     

@@ -17,6 +17,9 @@ struct OutfitCreatorView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.xl) {
+                    // Visual Mannequin
+                    visualMannequin
+                    
                     // Mannequin / Slots
                     slotsSection
                     
@@ -75,6 +78,63 @@ struct OutfitCreatorView: View {
         !outfitName.isEmpty && !selectedItems.isEmpty
     }
     
+    // MARK: - Visual Mannequin
+    
+    private var visualMannequin: some View {
+        ZStack {
+            // Base shadow/mannequin outline
+            Image(systemName: "figure.stand")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 280)
+                .foregroundColor(AppTheme.Colors.textTertiary.opacity(0.3))
+            
+            // Accessory
+            if let acc = selectedItems[.accessory], let data = acc.displayImage, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70)
+                    .offset(x: -50, y: -90)
+            }
+            
+            // Top
+            if let top = selectedItems[.top], let data = top.displayImage, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 140)
+                    .offset(y: -40)
+            }
+            
+            // Bottom
+            if let bottom = selectedItems[.bottom], let data = bottom.displayImage, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120)
+                    .offset(y: 50)
+            }
+            
+            // Shoes
+            if let shoes = selectedItems[.shoes], let data = shoes.displayImage, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 90)
+                    .offset(y: 130)
+            }
+        }
+        .frame(height: 320)
+        .frame(maxWidth: .infinity)
+        .background(AppTheme.Colors.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppTheme.Radius.md)
+                .stroke(AppTheme.Colors.border, lineWidth: 1)
+        )
+    }
+
     // MARK: - Slots Section
     
     private var slotsSection: some View {

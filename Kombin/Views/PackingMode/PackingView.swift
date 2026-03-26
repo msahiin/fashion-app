@@ -12,6 +12,8 @@ struct PackingView: View {
     @State private var endDate: Date = Calendar.current.date(byAdding: .day, value: 5, to: .now)!
     @State private var dayOutfits: [Date: Outfit] = [:]
     @State private var showSetup = true
+    @StateObject private var subscriptionManager = SubscriptionManager.shared
+    @State private var showPremiumGate = false
     
     private var tripDays: [Date] {
         var days: [Date] = []
@@ -37,27 +39,60 @@ struct PackingView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: AppTheme.Spacing.xl) {
-                    if showSetup {
-                        tripSetupSection
-                    } else {
-                        // Trip info card
-                        tripInfoCard
-                        
-                        // Day-by-day list
-                        dayByDaySection
-                        
-                        // Packing summary
-                        summarySection
+            if subscriptionManager.isPremium {
+                ScrollView {
+                    VStack(spacing: AppTheme.Spacing.xl) {
+                        if showSetup {
+                            tripSetupSection
+                        } else {
+                            tripInfoCard
+                            dayByDaySection
+                            summarySection
+                        }
                     }
+                    .padding(.horizontal, AppTheme.Spacing.xl)
+                    .padding(.vertical, AppTheme.Spacing.lg)
                 }
-                .padding(.horizontal, AppTheme.Spacing.xl)
-                .padding(.vertical, AppTheme.Spacing.lg)
+                .background(AppTheme.Colors.background)
+                .navigationTitle("Valiz Modu ✈️")
+                .navigationBarTitleDisplayMode(.large)
+            } else {
+                premiumLockOverlay
             }
-            .background(AppTheme.Colors.background)
-            .navigationTitle("Valiz Modu ✈️")
-            .navigationBarTitleDisplayMode(.large)
+        }
+    }
+    
+    private var premiumLockOverlay: some View {
+        VStack(spacing: AppTheme.Spacing.lg) {
+            Image(systemName: "suitcase.fill")
+                .font(.system(size: 64))
+                .foregroundColor(.yellow)
+            
+            Text("Valiz Modu")
+                .font(AppTheme.Typography.title1)
+                .foregroundColor(AppTheme.Colors.textPrimary)
+            
+            Text("Seyahatlerinize göre otomatik kapsül gardırop oluşturmak ve valizinizi akıllıca hazırlamak için PRO'ya geçin.")
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, AppTheme.Spacing.xl)
+            
+            Button("PRO Özellikleri Keşfet") {
+                showPremiumGate = true
+            }
+            .font(AppTheme.Typography.headline)
+            .foregroundColor(AppTheme.Colors.buttonText)
+            .padding(.horizontal, 32)
+            .padding(.vertical, 16)
+            .background(AppTheme.Colors.buttonFill)
+            .clipShape(Capsule())
+            .padding(.top, AppTheme.Spacing.lg)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppTheme.Colors.background)
+        .sheet(isPresented: $showPremiumGate) {
+            PremiumGateView()
         }
     }
     

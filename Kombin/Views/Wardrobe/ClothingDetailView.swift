@@ -207,9 +207,6 @@ struct ClothingDetailView: View {
                 if let lastWorn = item.lastWornDate {
                     statItem(value: daysSince(lastWorn), label: "Son Giyim")
                 }
-                
-                if let price = item.purchasePrice {
-                    statItem(value: "₺\(Int(price))", label: "Fiyat")
                 }
                 
                 Spacer()
@@ -536,6 +533,14 @@ struct ClothingDetailView: View {
                 await MainActor.run {
                     item.imageData = result
                     isRemovingBG = false
+                    
+                    if let uiImage = UIImage(data: result),
+                       let closestHex = uiImage.closestPresetHexColor(from: presetColors) {
+                        withAnimation {
+                            if isEditing { editColorHex = closestHex }
+                            item.colorHex = closestHex
+                        }
+                    }
                 }
             } catch {
                 await MainActor.run {

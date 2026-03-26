@@ -4,7 +4,9 @@ import SwiftData
 struct SettingsView: View {
     @AppStorage("appTheme") private var appTheme: String = "system"
     @AppStorage("appLanguage") private var appLanguage: String = "tr"
+    @AppStorage("openai_api_key") private var apiKey: String = ""
     @Query private var users: [User]
+    @StateObject private var subscriptionManager = SubscriptionManager.shared
     
     private var currentUser: User? { users.first }
     
@@ -18,6 +20,9 @@ struct SettingsView: View {
             
             // Premium
             premiumSection
+            
+            // AI Settings
+            aiSettingsSection
             
             // General
             generalSection
@@ -40,19 +45,9 @@ struct SettingsView: View {
                         .fill(AppTheme.Colors.elevatedBackground)
                         .frame(width: 56, height: 56)
                     
-                    if let data = currentUser?.profileImageData,
-                       let uiImage = UIImage(data: data) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 56, height: 56)
-                            .clipShape(Circle())
-                    } else {
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 24))
-                            .foregroundColor(AppTheme.Colors.textTertiary)
-                    }
-                }
+                    Image(systemName: "person.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(AppTheme.Colors.textTertiary)
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(currentUser?.name ?? "")
@@ -121,7 +116,7 @@ struct SettingsView: View {
                 HStack {
                     Text("Kombin")
                         .font(AppTheme.Typography.headline)
-                    Text(LocalizedStringKey("premium_badge"))
+                    Text("PRO")
                         .font(AppTheme.Typography.caption2)
                         .fontWeight(.bold)
                         .foregroundColor(AppTheme.Colors.buttonText)
@@ -131,29 +126,38 @@ struct SettingsView: View {
                         .clipShape(Capsule())
                 }
                 
-                Text("Unlimited outfits • AI suggestions • Ad-free")
-                    .font(AppTheme.Typography.caption1)
-                    .foregroundColor(AppTheme.Colors.textSecondary)
-                
-                Text("$2.99/month")
-                    .font(AppTheme.Typography.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(AppTheme.Colors.textPrimary)
-                
-                Button(action: {
-                    // TODO: StoreKit purchase
-                }) {
-                    Text("Subscribe")
-                        .font(AppTheme.Typography.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(AppTheme.Colors.buttonText)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, AppTheme.Spacing.md)
-                        .background(AppTheme.Colors.buttonFill)
-                        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
+                if subscriptionManager.isPremium {
+                    Text("Tüm özellikler açık. Sınırsız gardırobun tadını çıkar!")
+                        .font(AppTheme.Typography.caption1)
+                        .foregroundColor(AppTheme.Colors.textSecondary)
+                } else {
+                    Text("Sınırsız kombin • AI Koç • Valiz Modu")
+                        .font(AppTheme.Typography.caption1)
+                        .foregroundColor(AppTheme.Colors.textSecondary)
+                    
+                    NavigationLink(destination: PremiumGateView()) {
+                        Text("Yükselt")
+                            .font(AppTheme.Typography.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(AppTheme.Colors.buttonText)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, AppTheme.Spacing.md)
+                            .background(AppTheme.Colors.buttonFill)
+                            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .padding(.vertical, AppTheme.Spacing.sm)
+        }
+    }
+    
+    // MARK: - AI Settings
+    
+    private var aiSettingsSection: some View {
+        Section(header: Text("AI Ayarları"), footer: Text("OpenAI API anahtarınızı buradan güvenle girebilirsiniz. Anahtarınız sadece cihazınızda saklanır.")) {
+            SecureField("OpenAI API Key (sk-...)", text: $apiKey)
+                .font(.system(.subheadline, design: .monospaced))
         }
     }
     

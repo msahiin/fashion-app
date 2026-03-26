@@ -78,7 +78,7 @@ struct StyleCard: View {
     var body: some View {
         Button(action: onTap) {
             VStack(spacing: AppTheme.Spacing.sm) {
-                Text(style.icon)
+                Image(systemName: style.icon)
                     .font(.system(size: 32))
                 
                 Text(LocalizedStringKey(style.displayKey))

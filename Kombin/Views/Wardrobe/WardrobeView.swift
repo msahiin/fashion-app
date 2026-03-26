@@ -5,7 +5,9 @@ struct WardrobeView: View {
     @Query(sort: \ClothingItem.createdAt, order: .reverse) private var allItems: [ClothingItem]
     @State private var selectedCategory: ClothingCategory? = nil
     @State private var showAddItem = false
+    @State private var showPremiumGate = false
     @State private var searchText = ""
+    @StateObject private var subscriptionManager = SubscriptionManager.shared
     
     private let columns = [
         GridItem(.flexible(), spacing: AppTheme.Spacing.md),
@@ -48,7 +50,13 @@ struct WardrobeView: View {
             .searchable(text: $searchText, prompt: LocalizedStringKey("search"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showAddItem = true }) {
+                    Button(action: {
+                        if !subscriptionManager.isPremium && allItems.count >= 30 {
+                            showPremiumGate = true
+                        } else {
+                            showAddItem = true
+                        }
+                    }) {
                         Image(systemName: "plus")
                             .foregroundColor(AppTheme.Colors.textPrimary)
                     }
@@ -56,6 +64,9 @@ struct WardrobeView: View {
             }
             .sheet(isPresented: $showAddItem) {
                 AddItemView()
+            }
+            .sheet(isPresented: $showPremiumGate) {
+                PremiumGateView()
             }
         }
     }

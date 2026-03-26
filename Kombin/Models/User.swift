@@ -5,23 +5,17 @@ import SwiftData
 final class User {
     var name: String
     var gender: Gender
-    var birthYear: Int
-    var profileImageData: Data?
     var selectedStyles: [StylePreference]
     var createdAt: Date
     
     init(
         name: String = "",
         gender: Gender = .other,
-        birthYear: Int = 2000,
-        profileImageData: Data? = nil,
         selectedStyles: [StylePreference] = [],
         createdAt: Date = .now
     ) {
         self.name = name
         self.gender = gender
-        self.birthYear = birthYear
-        self.profileImageData = profileImageData
         self.selectedStyles = selectedStyles
         self.createdAt = createdAt
     }
@@ -57,14 +51,14 @@ enum StylePreference: String, Codable, CaseIterable {
     
     var icon: String {
         switch self {
-        case .classic: return "👔"
-        case .casual: return "👕"
-        case .sporty: return "🏃"
-        case .elegant: return "✨"
-        case .bohemian: return "🌸"
-        case .minimalist: return "◻️"
-        case .streetwear: return "🧢"
-        case .vintage: return "🕰️"
+        case .classic: return "briefcase"
+        case .casual: return "tshirt"
+        case .sporty: return "figure.run"
+        case .elegant: return "sparkles"
+        case .bohemian: return "leaf"
+        case .minimalist: return "square"
+        case .streetwear: return "cap.fill" // Or custom
+        case .vintage: return "clock"
         }
     }
 }
