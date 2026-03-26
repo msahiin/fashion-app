@@ -1,0 +1,662 @@
+{
+  "sourceLanguage" : "tr",
+  "strings" : {
+    "tab_home" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ana Sayfa" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Home" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inicio" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Startseite" } }
+      }
+    },
+    "tab_wardrobe" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Gardırop" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wardrobe" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Armario" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Kleiderschrank" } }
+      }
+    },
+    "tab_create" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kombin" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Crear" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erstellen" } }
+      }
+    },
+    "tab_calendar" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Takvim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calendar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Calendario" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Kalender" } }
+      }
+    },
+    "tab_outfits" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kombinlerim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Outfits" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Outfits" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Outfits" } }
+      }
+    },
+    "welcome_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kombin" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Kombin" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Kombin" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Kombin" } }
+      }
+    },
+    "welcome_subtitle" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Tarzını Keşfet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Style, Organized" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tu Estilo, Organizado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dein Stil, Organisiert" } }
+      }
+    },
+    "welcome_button" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Başlayalım" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get Started" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Empezar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Los Geht's" } }
+      }
+    },
+    "profile_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kendini Tanıt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About You" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sobre Ti" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Über Dich" } }
+      }
+    },
+    "profile_name" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Adın" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Name" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tu Nombre" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dein Name" } }
+      }
+    },
+    "profile_name_placeholder" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Adınızı girin" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter your name" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ingresa tu nombre" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Name eingeben" } }
+      }
+    },
+    "gender_male" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Erkek" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Male" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Masculino" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Männlich" } }
+      }
+    },
+    "gender_female" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kadın" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Female" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Femenino" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Weiblich" } }
+      }
+    },
+    "gender_other" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Diğer" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Other" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Otro" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Andere" } }
+      }
+    },
+    "birth_year" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Doğum Yılı" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Birth Year" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Año de Nacimiento" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Geburtsjahr" } }
+      }
+    },
+    "continue_button" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Devam" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Continuar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Weiter" } }
+      }
+    },
+    "style_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Tarzın Nedir?" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Style" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tu Estilo" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dein Stil" } }
+      }
+    },
+    "style_subtitle" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Birden fazla seçebilirsin" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select all that apply" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Selecciona todos los que apliquen" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wähle alle passenden aus" } }
+      }
+    },
+    "style_classic" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klasik" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Classic" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Clásico" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Klassisch" } }
+      }
+    },
+    "style_casual" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Casual" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Casual" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Casual" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Casual" } }
+      }
+    },
+    "style_sporty" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Sporcu" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sporty" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Deportivo" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Sportlich" } }
+      }
+    },
+    "style_elegant" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Elegant" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Elegant" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Elegante" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Elegant" } }
+      }
+    },
+    "style_bohemian" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Bohem" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bohemian" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bohemio" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bohemian" } }
+      }
+    },
+    "style_minimalist" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Minimalist" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Minimalist" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Minimalista" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Minimalist" } }
+      }
+    },
+    "style_streetwear" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Streetwear" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Streetwear" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Streetwear" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Streetwear" } }
+      }
+    },
+    "style_vintage" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Vintage" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Vintage" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Vintage" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Vintage" } }
+      }
+    },
+    "first_item_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "İlk Kıyafetini Ekle!" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Your First Piece!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Añade Tu Primera Prenda!" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Füge dein erstes Teil hinzu!" } }
+      }
+    },
+    "first_item_subtitle" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Gardırobunu oluşturmaya başla" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start building your wardrobe" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Empieza a construir tu armario" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Beginne deinen Kleiderschrank aufzubauen" } }
+      }
+    },
+    "take_photo" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Fotoğraf Çek" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Take Photo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tomar Foto" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Foto Aufnehmen" } }
+      }
+    },
+    "from_gallery" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Galeriden Seç" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "From Gallery" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desde Galería" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Aus Galerie" } }
+      }
+    },
+    "skip_for_now" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Daha sonra atla" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skip for now" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Omitir por ahora" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Vorerst überspringen" } }
+      }
+    },
+    "greeting_morning" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Günaydın," } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good Morning," } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenos Días," } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Guten Morgen," } }
+      }
+    },
+    "greeting_afternoon" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "İyi günler," } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good Afternoon," } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenas Tardes," } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Guten Tag," } }
+      }
+    },
+    "greeting_evening" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "İyi akşamlar," } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good Evening," } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenas Noches," } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Guten Abend," } }
+      }
+    },
+    "todays_outfit" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Bugünün Kombini" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Today's Outfit" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Outfit de Hoy" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Heutiges Outfit" } }
+      }
+    },
+    "weekly_plan" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Haftalık Plan" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weekly Plan" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Plan Semanal" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wochenplan" } }
+      }
+    },
+    "new_outfit" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Yeni Kombin" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Outfit" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nuevo Outfit" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Neues Outfit" } }
+      }
+    },
+    "wardrobe_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Gardırop" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wardrobe" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Armario" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Kleiderschrank" } }
+      }
+    },
+    "category_all" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Tümü" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Todos" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Alle" } }
+      }
+    },
+    "category_top" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Gömlek" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tops" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tops" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Oberteile" } }
+      }
+    },
+    "category_tshirt" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "T-Shirt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "T-Shirts" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Camisetas" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "T-Shirts" } }
+      }
+    },
+    "category_bottom" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Pantolon" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bottoms" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pantalones" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hosen" } }
+      }
+    },
+    "category_shoes" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ayakkabı" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shoes" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Zapatos" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Schuhe" } }
+      }
+    },
+    "category_accessory" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Aksesuar" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accessories" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Accesorios" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Accessoires" } }
+      }
+    },
+    "category_outerwear" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Dış Giyim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Outerwear" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Abrigos" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Oberbekleidung" } }
+      }
+    },
+    "save_outfit" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kombini Kaydet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save Outfit" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guardar Outfit" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Outfit Speichern" } }
+      }
+    },
+    "outfit_name_placeholder" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kombin adı..." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Outfit name..." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nombre del outfit..." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Outfit-Name..." } }
+      }
+    },
+    "slot_top" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Üst" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Superior" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Oberteil" } }
+      }
+    },
+    "slot_bottom" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Alt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bottom" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inferior" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Unterteil" } }
+      }
+    },
+    "slot_shoes" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ayakkabı" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shoes" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Zapatos" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Schuhe" } }
+      }
+    },
+    "slot_accessory" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Aksesuar" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accessory" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Accesorio" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Accessoire" } }
+      }
+    },
+    "my_outfits" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kombinlerim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "My Outfits" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mis Outfits" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Meine Outfits" } }
+      }
+    },
+    "calendar_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Takvim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calendar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Calendario" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Kalender" } }
+      }
+    },
+    "settings_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ayarlar" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Configuración" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einstellungen" } }
+      }
+    },
+    "theme_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Tema" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Theme" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tema" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Thema" } }
+      }
+    },
+    "theme_light" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Açık" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Light" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Claro" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hell" } }
+      }
+    },
+    "theme_dark" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Koyu" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dark" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Oscuro" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dunkel" } }
+      }
+    },
+    "theme_system" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Sistem" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sistema" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "System" } }
+      }
+    },
+    "language_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Dil" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Idioma" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Sprache" } }
+      }
+    },
+    "save" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kaydet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guardar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Speichern" } }
+      }
+    },
+    "cancel" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "İptal" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Abbrechen" } }
+      }
+    },
+    "delete" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Sil" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Löschen" } }
+      }
+    },
+    "edit" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Düzenle" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Editar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bearbeiten" } }
+      }
+    },
+    "search" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ara" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchen" } }
+      }
+    },
+    "items_count" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "%d kıyafet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d items" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "%d prendas" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%d Teile" } }
+      }
+    },
+    "outfits_count" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "%d kombin" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d outfits" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "%d outfits" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%d Outfits" } }
+      }
+    },
+    "add_item_title" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kıyafet Ekle" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Item" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Añadir Prenda" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Teil Hinzufügen" } }
+      }
+    },
+    "season_spring" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "İlkbahar" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Spring" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Primavera" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Frühling" } }
+      }
+    },
+    "season_summer" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Yaz" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Summer" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Verano" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Sommer" } }
+      }
+    },
+    "season_autumn" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Sonbahar" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Autumn" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Otoño" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Herbst" } }
+      }
+    },
+    "season_winter" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kış" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Winter" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Invierno" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Winter" } }
+      }
+    },
+    "season_allSeason" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "4 Mevsim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All Seasons" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Todas las Estaciones" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Alle Jahreszeiten" } }
+      }
+    },
+    "change" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Değiştir" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cambiar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ändern" } }
+      }
+    },
+    "no_outfit_planned" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Henüz kombin planlanmadı" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No outfit planned yet" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No hay outfit planificado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Noch kein Outfit geplant" } }
+      }
+    },
+    "empty_wardrobe" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Gardırobun boş!\nİlk kıyafetini ekleyerek başla." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your wardrobe is empty!\nStart by adding your first item." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Tu armario está vacío!\nComienza añadiendo tu primera prenda." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dein Kleiderschrank ist leer!\nFüge dein erstes Teil hinzu." } }
+      }
+    },
+    "color_label" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Renk" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Color" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Color" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Farbe" } }
+      }
+    },
+    "season_label" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Mevsim" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Season" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Temporada" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Saison" } }
+      }
+    },
+    "style_label" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Tarz" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Style" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estilo" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Stil" } }
+      }
+    },
+    "brand_label" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Marka" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Brand" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Marca" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Marke" } }
+      }
+    },
+    "notes_label" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Not" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notes" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notas" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Notizen" } }
+      }
+    },
+    "ai_illustration" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "AI İllüstrasyon ile Görselleştir" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Visualize with AI Illustration" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Visualizar con Ilustración AI" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Mit KI-Illustration visualisieren" } }
+      }
+    },
+    "premium_badge" : {
+      "localizations" : {
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

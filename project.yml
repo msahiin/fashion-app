@@ -1,0 +1,21 @@
+name: Kombin
+options:
+  bundleIdPrefix: com.mehmet.kombin
+targets:
+  Kombin:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: [Kombin]
+    settings:
+      CODE_SIGNING_ALLOWED: NO
+      CODE_SIGNING_REQUIRED: NO
+      PRODUCT_BUNDLE_IDENTIFIER: com.mehmet.kombin
+    info:
+      path: Kombin/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        CFBundleDisplayName: Kombin
+        CFBundleName: Kombin
