@@ -31,5 +31,5 @@ jobs:
           xcodebuild build \
             -project Kombin.xcodeproj \
             -scheme Kombin \
-            -destination "generic/platform=iOS Simulator" \
+            -destination "generic/platform=iOS" \
             CODE_SIGNING_ALLOWED=NO
