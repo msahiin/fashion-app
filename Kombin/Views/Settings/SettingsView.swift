@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State private var showProfileEditor = false
     @State private var editingName = ""
     @State private var editingGender: Gender = .other
+    @State private var showLanguageAlert = false
     
     private var currentUser: User? { users.first }
     
@@ -121,12 +122,15 @@ struct SettingsView: View {
                 }
             }
             .onChange(of: appLanguage) { _, newValue in
-                // Update locale and restart the app
                 UserDefaults.standard.set([newValue], forKey: "AppleLanguages")
                 UserDefaults.standard.synchronize()
-                // Force exit so the app re-launches with the new language
-                exit(0)
+                showLanguageAlert = true
             }
+        }
+        .alert("Dil Değiştirildi", isPresented: $showLanguageAlert) {
+            Button("Tamam", role: .cancel) { }
+        } message: {
+            Text("Yeni dilin aktif olması için lütfen uygulamayı kapatıp tekrar açın.")
         }
     }
     
