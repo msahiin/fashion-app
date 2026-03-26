@@ -38,17 +38,3 @@ final class Outfit {
         calendarEntries?.count ?? 0
     }
 }
-
-@Model
-final class OutfitItem {
-    var slot: MannequinSlot
-    var clothingItem: ClothingItem?
-    
-    @Relationship(deleteRule: .nullify)
-    var outfit: Outfit?
-    
-    init(slot: MannequinSlot, clothingItem: ClothingItem? = nil) {
-        self.slot = slot
-        self.clothingItem = clothingItem
-    }
-}
