@@ -7,7 +7,7 @@ import CoreImage.CIFilterBuiltins
 /// Background removal service supporting multiple providers
 /// Free: On-device Vision framework (iOS 17+)
 /// Premium: remove.bg API for higher quality
-class BackgroundRemovalService {
+actor BackgroundRemovalService {
     static let shared = BackgroundRemovalService()
     
     /// remove.bg API key — set this in your app settings or env
@@ -16,12 +16,12 @@ class BackgroundRemovalService {
         UserDefaults.standard.string(forKey: "removeBgApiKey") ?? ""
     }
     
-    enum RemovalQuality {
+    enum RemovalQuality: Sendable {
         case free       // On-device VNGenerateForegroundInstanceMaskRequest
         case premium    // remove.bg API
     }
     
-    enum BGRemovalError: Error, LocalizedError {
+    enum BGRemovalError: Error, LocalizedError, Sendable {
         case noImageData
         case apiKeyMissing
         case networkError(String)
@@ -64,19 +64,14 @@ class BackgroundRemovalService {
         
         // Use Vision's subject lifting (iOS 17+)
         if #available(iOS 17.0, *) {
-            return try await withCheckedThrowingContinuation { continuation in
-                DispatchQueue.global(qos: .userInitiated).async {
-                    do {
-                        let result = try self.applySubjectLifting(cgImage: cgImage, size: uiImage.size)
-                        if let pngData = result.pngData() {
-                            continuation.resume(returning: pngData)
-                        } else {
-                            continuation.resume(throwing: BGRemovalError.processingFailed)
-                        }
-                    } catch {
-                        continuation.resume(throwing: error)
-                    }
-                }
+            // Task.detached offloads heavy Vision work from the actor's main thread if necessary,
+            // but for simplicity and correct Sendability, we'll run it within the actor context
+            // which is already off-main-thread.
+            let result = try self.applySubjectLifting(cgImage: cgImage, size: uiImage.size)
+            if let pngData = result.pngData() {
+                return pngData
+            } else {
+                throw BGRemovalError.processingFailed
             }
         } else {
             throw BGRemovalError.unsupportedOS
