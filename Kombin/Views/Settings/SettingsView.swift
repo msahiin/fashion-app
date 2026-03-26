@@ -7,59 +7,99 @@ struct SettingsView: View {
     @AppStorage("openai_api_key") private var apiKey: String = ""
     @Query private var users: [User]
     @StateObject private var subscriptionManager = SubscriptionManager.shared
+    @Environment(\.modelContext) private var modelContext
+    
+    @State private var showProfileEditor = false
+    @State private var editingName = ""
+    @State private var editingGender: Gender = .other
     
     private var currentUser: User? { users.first }
     
     var body: some View {
         List {
-            // Profile
             profileSection
-            
-            // Appearance
             appearanceSection
-            
-            // Premium
             premiumSection
-            
-            // AI Settings
             aiSettingsSection
-            
-            // General
             generalSection
-            
-            // About
             aboutSection
         }
-        .navigationTitle(LocalizedStringKey("settings_title"))
+        .navigationTitle("Ayarlar")
         .navigationBarTitleDisplayMode(.large)
+        .sheet(isPresented: $showProfileEditor) {
+            profileEditorSheet
+        }
     }
     
     // MARK: - Profile
     
     private var profileSection: some View {
         Section {
-            HStack(spacing: AppTheme.Spacing.lg) {
-                // Avatar
-                ZStack {
-                    Circle()
-                        .fill(AppTheme.Colors.elevatedBackground)
-                        .frame(width: 56, height: 56)
+            Button(action: {
+                editingName = currentUser?.name ?? ""
+                editingGender = currentUser?.gender ?? .other
+                showProfileEditor = true
+            }) {
+                HStack(spacing: AppTheme.Spacing.lg) {
+                    ZStack {
+                        Circle()
+                            .fill(AppTheme.Colors.elevatedBackground)
+                            .frame(width: 56, height: 56)
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(AppTheme.Colors.textTertiary)
+                    }
                     
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 24))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(currentUser?.name ?? "")
+                            .font(AppTheme.Typography.headline)
+                            .foregroundColor(AppTheme.Colors.textPrimary)
+                        Text("Profili Düzenle")
+                            .font(AppTheme.Typography.caption1)
+                            .foregroundColor(AppTheme.Colors.textSecondary)
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(AppTheme.Typography.caption1)
                         .foregroundColor(AppTheme.Colors.textTertiary)
                 }
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(currentUser?.name ?? "")
-                        .font(AppTheme.Typography.headline)
-                        .foregroundColor(AppTheme.Colors.textPrimary)
+            }
+        }
+    }
+    
+    // MARK: - Profile Editor Sheet
+    
+    private var profileEditorSheet: some View {
+        NavigationStack {
+            Form {
+                Section(header: Text("Profil Bilgileri")) {
+                    TextField("İsim", text: $editingName)
                     
-                    Text(LocalizedStringKey("edit"))
-                        .font(AppTheme.Typography.caption1)
-                        .foregroundColor(AppTheme.Colors.textSecondary)
+                    Picker("Cinsiyet", selection: $editingGender) {
+                        ForEach(Gender.allCases, id: \.self) { gender in
+                            Text(LocalizedStringKey(gender.displayKey)).tag(gender)
+                        }
+                    }
                 }
-                
-                Spacer()
+            }
+            .navigationTitle("Profili Düzenle")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("İptal") { showProfileEditor = false }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Kaydet") {
+                        if let user = currentUser {
+                            user.name = editingName
+                            user.gender = editingGender
+                        }
+                        showProfileEditor = false
+                    }
+                    .fontWeight(.semibold)
+                }
             }
         }
     }
@@ -67,43 +107,25 @@ struct SettingsView: View {
     // MARK: - Appearance
     
     private var appearanceSection: some View {
-        Section(header: Text(LocalizedStringKey("theme_title"))) {
-            // Theme picker
-            Picker(LocalizedStringKey("theme_title"), selection: $appTheme) {
-                Text(LocalizedStringKey("theme_light")).tag("light")
-                Text(LocalizedStringKey("theme_dark")).tag("dark")
-                Text(LocalizedStringKey("theme_system")).tag("system")
+        Section(header: Text("Görünüm")) {
+            Picker("Tema", selection: $appTheme) {
+                Text("Açık").tag("light")
+                Text("Koyu").tag("dark")
+                Text("Sistem").tag("system")
             }
             .pickerStyle(.segmented)
             
-            // Language picker
-            HStack {
-                Text(LocalizedStringKey("language_title"))
-                    .foregroundColor(AppTheme.Colors.textPrimary)
-                
-                Spacer()
-                
-                Menu {
-                    ForEach(LocalizationManager.supportedLanguages, id: \.code) { lang in
-                        Button(action: { appLanguage = lang.code }) {
-                            HStack {
-                                Text("\(lang.flag) \(lang.name)")
-                                if appLanguage == lang.code {
-                                    Image(systemName: "checkmark")
-                                }
-                            }
-                        }
-                    }
-                } label: {
-                    HStack(spacing: 4) {
-                        Text(currentLanguageDisplay)
-                            .font(AppTheme.Typography.subheadline)
-                            .foregroundColor(AppTheme.Colors.textSecondary)
-                        Image(systemName: "chevron.down")
-                            .font(AppTheme.Typography.caption2)
-                            .foregroundColor(AppTheme.Colors.textTertiary)
-                    }
+            Picker("Dil", selection: $appLanguage) {
+                ForEach(LocalizationManager.supportedLanguages, id: \.code) { lang in
+                    Text(lang.name).tag(lang.code)
                 }
+            }
+            .onChange(of: appLanguage) { _, newValue in
+                // Update locale and restart the app
+                UserDefaults.standard.set([newValue], forKey: "AppleLanguages")
+                UserDefaults.standard.synchronize()
+                // Force exit so the app re-launches with the new language
+                exit(0)
             }
         }
     }
@@ -164,17 +186,13 @@ struct SettingsView: View {
     // MARK: - General
     
     private var generalSection: some View {
-        Section(header: Text("General")) {
-            NavigationLink(destination: Text("Notifications")) {
-                Label("Notifications", systemImage: "bell")
+        Section(header: Text("Genel")) {
+            NavigationLink(destination: Text("Bildirimler yakında aktif olacak.")) {
+                Label("Bildirimler", systemImage: "bell")
             }
             
-            NavigationLink(destination: Text("Location")) {
-                Label("Weather Location", systemImage: "location")
-            }
-            
-            NavigationLink(destination: Text("Backup")) {
-                Label("iCloud Backup", systemImage: "icloud")
+            NavigationLink(destination: Text("iCloud yedekleme yakında aktif olacak.")) {
+                Label("iCloud Yedekleme", systemImage: "icloud")
             }
         }
     }
@@ -182,23 +200,36 @@ struct SettingsView: View {
     // MARK: - About
     
     private var aboutSection: some View {
-        Section {
-            NavigationLink(destination: Text("Privacy")) {
-                Text("Privacy Policy")
+        Section(header: Text("Hakkında")) {
+            Link(destination: URL(string: "https://example.com/privacy")!) {
+                HStack {
+                    Text("Gizlilik Politikası")
+                        .foregroundColor(AppTheme.Colors.textPrimary)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(AppTheme.Typography.caption2)
+                        .foregroundColor(AppTheme.Colors.textTertiary)
+                }
+            }
+            
+            Link(destination: URL(string: "https://apple.com/legal/internet-services/itunes/dev/stdeula/")!) {
+                HStack {
+                    Text("Kullanım Şartları")
+                        .foregroundColor(AppTheme.Colors.textPrimary)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(AppTheme.Typography.caption2)
+                        .foregroundColor(AppTheme.Colors.textTertiary)
+                }
             }
             
             HStack {
-                Text("Version")
+                Text("Sürüm")
                 Spacer()
-                Text("1.0.0")
+                Text("1.2.0")
                     .foregroundColor(AppTheme.Colors.textTertiary)
             }
         }
-    }
-    
-    private var currentLanguageDisplay: String {
-        let lang = LocalizationManager.supportedLanguages.first { $0.code == appLanguage }
-        return "\(lang?.flag ?? "") \(lang?.name ?? "")"
     }
 }
 

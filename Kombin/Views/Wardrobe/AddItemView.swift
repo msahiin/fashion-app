@@ -197,7 +197,7 @@ struct AddItemView: View {
                     ForEach(ClothingCategory.allCases, id: \.self) { category in
                         Button(action: { selectedCategory = category }) {
                             HStack(spacing: 4) {
-                                Text(category.icon)
+                                Image(systemName: category.icon)
                                     .font(AppTheme.Typography.caption1)
                                 Text(LocalizedStringKey(category.displayKey))
                             }

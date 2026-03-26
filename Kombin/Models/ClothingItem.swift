@@ -76,14 +76,14 @@ enum ClothingCategory: String, Codable, CaseIterable {
     
     var icon: String {
         switch self {
-        case .top: return "👔"
-        case .tshirt: return "👕"
-        case .bottom: return "👖"
-        case .shoes: return "👟"
-        case .accessory: return "💎"
-        case .outerwear: return "🧥"
-        case .shorts: return "🩳"
-        case .skirt: return "👗"
+        case .top: return "tshirt"
+        case .tshirt: return "tshirt.fill"
+        case .bottom: return "figure.walk"
+        case .shoes: return "shoe.fill"
+        case .accessory: return "sparkles"
+        case .outerwear: return "cloud.snow"
+        case .shorts: return "figure.run"
+        case .skirt: return "figure.stand.dress"
         }
     }
     

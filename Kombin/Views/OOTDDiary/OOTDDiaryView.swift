@@ -25,8 +25,10 @@ struct OOTDDiaryView: View {
                             OOTDGridCell(entry: entry)
                         }
                     }
+                    .padding(.bottom, AppTheme.Spacing.xxl)
                 }
             }
+            .scrollContentBackground(.hidden)
             .background(AppTheme.Colors.background)
             .navigationTitle("OOTD Günlüğü")
             .navigationBarTitleDisplayMode(.large)

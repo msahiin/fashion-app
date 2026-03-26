@@ -16,7 +16,11 @@ class SubscriptionManager: ObservableObject {
     @Published var isLoading: Bool = false
     
     var isPremium: Bool {
-        !purchasedProductIDs.isEmpty
+        #if DEBUG
+        return true
+        #else
+        return !purchasedProductIDs.isEmpty
+        #endif
     }
     
     private var transactionListener: Task<Void, Error>?

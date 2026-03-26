@@ -82,50 +82,78 @@ struct OutfitCreatorView: View {
     
     private var visualMannequin: some View {
         ZStack {
-            // Base shadow/mannequin outline
+            // Base mannequin figure
             Image(systemName: "figure.stand")
                 .resizable()
                 .scaledToFit()
                 .frame(height: 280)
-                .foregroundColor(AppTheme.Colors.textTertiary.opacity(0.3))
+                .foregroundColor(AppTheme.Colors.textTertiary.opacity(0.15))
             
-            // Accessory
-            if let acc = selectedItems[.accessory], let data = acc.displayImage, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 70)
-                    .offset(x: -50, y: -90)
-            }
-            
-            // Top
-            if let top = selectedItems[.top], let data = top.displayImage, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 140)
-                    .offset(y: -40)
-            }
-            
-            // Bottom
-            if let bottom = selectedItems[.bottom], let data = bottom.displayImage, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 120)
-                    .offset(y: 50)
-            }
-            
-            // Shoes
-            if let shoes = selectedItems[.shoes], let data = shoes.displayImage, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 90)
-                    .offset(y: 130)
+            // Layered clothing items with proper body mapping
+            VStack(spacing: -8) {
+                // Accessory area (head level)
+                if let acc = selectedItems[.accessory], let data = acc.displayImage, let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                        .overlay(
+                            Circle().stroke(AppTheme.Colors.border, lineWidth: 1)
+                        )
+                        .offset(x: 55, y: -15)
+                }
+                
+                // Top area (torso)
+                if let top = selectedItems[.top], let data = top.displayImage, let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 110, height: 100)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 8)
+                        )
+                        .shadow(color: Color.black.opacity(0.08), radius: 4, y: 2)
+                } else {
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 100)
+                }
+                
+                // Bottom area (legs)
+                if let bottom = selectedItems[.bottom], let data = bottom.displayImage, let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 95, height: 100)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 8)
+                        )
+                        .shadow(color: Color.black.opacity(0.08), radius: 4, y: 2)
+                } else {
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 100)
+                }
+                
+                // Shoes area (feet)
+                if let shoes = selectedItems[.shoes], let data = shoes.displayImage, let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60, height: 45)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 6)
+                        )
+                        .shadow(color: Color.black.opacity(0.08), radius: 4, y: 2)
+                } else {
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 35)
+                }
             }
         }
-        .frame(height: 320)
+        .frame(height: 340)
         .frame(maxWidth: .infinity)
         .background(AppTheme.Colors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))

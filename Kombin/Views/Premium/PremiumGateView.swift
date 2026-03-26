@@ -7,14 +7,17 @@ struct PremiumGateView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: AppTheme.Spacing.xl) {
+            VStack(spacing: 0) {
                 
-                // Header (Close Button + Restore)
+                // Header
                 HStack {
                     Button(action: { dismiss() }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 28))
-                            .foregroundColor(AppTheme.Colors.textTertiary)
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(AppTheme.Colors.textSecondary)
+                            .padding(8)
+                            .background(AppTheme.Colors.elevatedBackground)
+                            .clipShape(Circle())
                     }
                     
                     Spacer()
@@ -23,94 +26,101 @@ struct PremiumGateView: View {
                         Task { await subscriptionManager.restorePurchases() }
                     }) {
                         Text("Geri Yükle")
-                            .font(AppTheme.Typography.subheadline)
+                            .font(AppTheme.Typography.caption1)
                             .foregroundColor(AppTheme.Colors.textSecondary)
                     }
                 }
-                .padding(.top, AppTheme.Spacing.md)
-                .padding(.horizontal, AppTheme.Spacing.lg)
+                .padding(.horizontal, AppTheme.Spacing.xl)
+                .padding(.top, AppTheme.Spacing.lg)
                 
-                // Hero Section
-                VStack(spacing: AppTheme.Spacing.md) {
-                    Image(systemName: "crown.fill")
-                        .font(.system(size: 64))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [.yellow, .orange],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .padding(.bottom, AppTheme.Spacing.sm)
+                // Hero illustration area
+                VStack(spacing: AppTheme.Spacing.lg) {
+                    // Decorative circles
+                    ZStack {
+                        Circle()
+                            .stroke(AppTheme.Colors.border.opacity(0.3), lineWidth: 1)
+                            .frame(width: 200, height: 200)
+                        Circle()
+                            .stroke(AppTheme.Colors.border.opacity(0.2), lineWidth: 1)
+                            .frame(width: 160, height: 160)
+                        Circle()
+                            .stroke(AppTheme.Colors.border.opacity(0.1), lineWidth: 1)
+                            .frame(width: 120, height: 120)
+                        
+                        // Center icon
+                        VStack(spacing: 4) {
+                            Image(systemName: "wand.and.stars")
+                                .font(.system(size: 36, weight: .light))
+                                .foregroundColor(AppTheme.Colors.textPrimary)
+                            Text("PRO")
+                                .font(.system(size: 14, weight: .bold, design: .rounded))
+                                .foregroundColor(AppTheme.Colors.textSecondary)
+                        }
+                    }
+                    .padding(.top, AppTheme.Spacing.xxl)
                     
                     Text("Kombin PRO")
-                        .font(.system(size: 34, weight: .bold, design: .serif))
+                        .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(AppTheme.Colors.textPrimary)
                     
-                    Text("Potansiyelini Sınırlandırma")
+                    Text("Gardırobunun tam potansiyelini aç.")
                         .font(AppTheme.Typography.body)
                         .foregroundColor(AppTheme.Colors.textSecondary)
                 }
-                .padding(.top, AppTheme.Spacing.lg)
+                .padding(.bottom, AppTheme.Spacing.xxl)
                 
-                // Features List
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    proFeatureRow(icon: "infinity", title: "Sınırsız Gardırop", desc: "30 kıyafet limitini kaldırın.")
-                    proFeatureRow(icon: "sparkles", title: "AI Stil Koçu", desc: "OpenAI destekli sınırsız sohbet.")
-                    proFeatureRow(icon: "suitcase", title: "Valiz Modu", desc: "Tatillerinizi hava durumuna göre planlayın.")
-                    proFeatureRow(icon: "scissors", title: "PRO Arkaplan Kesici", desc: "Kusursuz ve temiz ürün kesimleri.")
-                    proFeatureRow(icon: "chart.pie", title: "Gelişmiş İstatistikler", desc: "Giyme başı maliyet ve içgörüler.")
+                // Features
+                VStack(spacing: AppTheme.Spacing.lg) {
+                    featureRow(icon: "infinity", title: "Sınırsız Gardırop", desc: "30 kıyafet limitini kaldır.")
+                    featureRow(icon: "bubble.left.and.bubble.right", title: "AI Stil Koçu", desc: "Yapay zeka ile sınırsız sohbet.")
+                    featureRow(icon: "suitcase", title: "Valiz Modu", desc: "Hava durumuna göre kapsül gardırop.")
+                    featureRow(icon: "chart.bar", title: "Gelişmiş İstatistikler", desc: "Dolap kullanım oranı ve içgörüler.")
+                    featureRow(icon: "scissors", title: "PRO Arkaplan Kesici", desc: "Kusursuz ürün kesimleri.")
                 }
                 .padding(.horizontal, AppTheme.Spacing.xl)
-                .padding(.vertical, AppTheme.Spacing.md)
                 
                 // Pricing
-                if subscriptionManager.isLoading {
-                    ProgressView()
-                        .padding()
-                } else {
-                    VStack(spacing: AppTheme.Spacing.md) {
-                        if subscriptionManager.products.isEmpty {
-                            // Fallback exactly like real subscriptions handles delays
-                            pricingButton(title: "Aylık", price: "₺99.99/ay")
-                            pricingButton(title: "Yıllık", price: "₺799.99/yıl", savings: "En Popüler")
-                        } else {
-                            ForEach(subscriptionManager.products, id: \.id) { product in
-                                Button(action: {
-                                    Task {
-                                        _ = try? await subscriptionManager.purchase(product)
+                VStack(spacing: AppTheme.Spacing.md) {
+                    if subscriptionManager.products.isEmpty {
+                        pricingCard(title: "Aylık", price: "₺99.99/ay", isPopular: false)
+                        pricingCard(title: "Yıllık", price: "₺799.99/yıl", isPopular: true)
+                    } else {
+                        ForEach(subscriptionManager.products, id: \.id) { product in
+                            Button(action: {
+                                Task { _ = try? await subscriptionManager.purchase(product) }
+                            }) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(product.displayName)
+                                            .font(AppTheme.Typography.headline)
+                                        Text(product.displayPrice)
+                                            .font(AppTheme.Typography.caption1)
+                                            .foregroundColor(AppTheme.Colors.textSecondary)
                                     }
-                                }) {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(product.displayName)
-                                                .font(AppTheme.Typography.headline)
-                                            Text(product.displayPrice)
-                                                .font(AppTheme.Typography.caption1)
-                                        }
-                                        Spacer()
-                                    }
-                                    .padding(AppTheme.Spacing.lg)
-                                    .background(AppTheme.Colors.cardBackground)
-                                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: AppTheme.Radius.md)
-                                            .stroke(Color.yellow.opacity(0.5), lineWidth: 1)
-                                    )
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(AppTheme.Typography.caption1)
+                                        .foregroundColor(AppTheme.Colors.textTertiary)
                                 }
-                                .foregroundColor(AppTheme.Colors.textPrimary)
+                                .padding(AppTheme.Spacing.lg)
+                                .background(AppTheme.Colors.cardBackground)
+                                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: AppTheme.Radius.md)
+                                        .stroke(AppTheme.Colors.border, lineWidth: 1)
+                                )
                             }
+                            .foregroundColor(AppTheme.Colors.textPrimary)
                         }
                     }
-                    .padding(.horizontal, AppTheme.Spacing.xl)
-                    .padding(.top, AppTheme.Spacing.lg)
                 }
+                .padding(.horizontal, AppTheme.Spacing.xl)
+                .padding(.top, AppTheme.Spacing.xxl)
                 
-                // T&C / Privacy
+                // Legal
                 VStack(spacing: 8) {
                     Text("Abonelikler iTunes hesabınızdan tahsil edilir.")
                         .multilineTextAlignment(.center)
-                        
                     HStack(spacing: AppTheme.Spacing.md) {
                         Link("Gizlilik Politikası", destination: URL(string: "https://example.com/privacy")!)
                         Text("•")
@@ -120,34 +130,35 @@ struct PremiumGateView: View {
                 .font(AppTheme.Typography.caption2)
                 .foregroundColor(AppTheme.Colors.textTertiary)
                 .padding(.horizontal, AppTheme.Spacing.xl)
-                .padding(.top, AppTheme.Spacing.lg)
-                .padding(.bottom, AppTheme.Spacing.xxl)
+                .padding(.top, AppTheme.Spacing.xxl)
+                .padding(.bottom, AppTheme.Spacing.xxxl)
             }
         }
         .background(AppTheme.Colors.background.ignoresSafeArea())
     }
     
-    private func proFeatureRow(icon: String, title: String, desc: String) -> some View {
-        HStack(alignment: .top, spacing: AppTheme.Spacing.md) {
+    private func featureRow(icon: String, title: String, desc: String) -> some View {
+        HStack(alignment: .top, spacing: AppTheme.Spacing.lg) {
             Image(systemName: icon)
-                .font(.system(size: 24))
-                .foregroundColor(.yellow)
-                .frame(width: 32)
+                .font(.system(size: 20, weight: .light))
+                .foregroundColor(AppTheme.Colors.textPrimary)
+                .frame(width: 28)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(AppTheme.Typography.headline)
+                    .font(AppTheme.Typography.subheadline)
+                    .fontWeight(.semibold)
                     .foregroundColor(AppTheme.Colors.textPrimary)
-                
                 Text(desc)
                     .font(AppTheme.Typography.caption1)
                     .foregroundColor(AppTheme.Colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
             }
+            
+            Spacer()
         }
     }
     
-    private func pricingButton(title: String, price: String, savings: String? = nil) -> some View {
+    private func pricingCard(title: String, price: String, isPopular: Bool) -> some View {
         Button(action: {}) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
@@ -155,17 +166,18 @@ struct PremiumGateView: View {
                         .font(AppTheme.Typography.headline)
                     Text(price)
                         .font(AppTheme.Typography.caption1)
+                        .foregroundColor(AppTheme.Colors.textSecondary)
                 }
                 Spacer()
                 
-                if let savings = savings {
-                    Text(savings)
+                if isPopular {
+                    Text("En Popüler")
                         .font(AppTheme.Typography.caption2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .fontWeight(.semibold)
+                        .foregroundColor(AppTheme.Colors.buttonText)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 4)
-                        .background(Color.yellow)
+                        .background(AppTheme.Colors.buttonFill)
                         .clipShape(Capsule())
                 }
             }
@@ -174,7 +186,7 @@ struct PremiumGateView: View {
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
             .overlay(
                 RoundedRectangle(cornerRadius: AppTheme.Radius.md)
-                    .stroke(Color.yellow.opacity(0.5), lineWidth: 1)
+                    .stroke(AppTheme.Colors.border, lineWidth: 1)
             )
         }
         .foregroundColor(AppTheme.Colors.textPrimary)
@@ -184,4 +196,3 @@ struct PremiumGateView: View {
 #Preview {
     PremiumGateView()
 }
-

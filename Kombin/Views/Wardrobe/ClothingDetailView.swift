@@ -272,7 +272,7 @@ struct ClothingDetailView: View {
                         ForEach(ClothingCategory.allCases, id: \.self) { cat in
                             Button(action: { editCategory = cat }) {
                                 HStack(spacing: 4) {
-                                    Text(cat.icon).font(AppTheme.Typography.caption1)
+                                    Image(systemName: cat.icon).font(AppTheme.Typography.caption1)
                                     Text(LocalizedStringKey(cat.displayKey))
                                 }
                                 .pillStyle(isSelected: editCategory == cat)
