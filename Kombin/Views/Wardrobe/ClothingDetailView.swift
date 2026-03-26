@@ -207,7 +207,6 @@ struct ClothingDetailView: View {
                 if let lastWorn = item.lastWornDate {
                     statItem(value: daysSince(lastWorn), label: "Son Giyim")
                 }
-                }
                 
                 Spacer()
             }

@@ -48,7 +48,7 @@ struct SettingsView: View {
                     Image(systemName: "person.fill")
                         .font(.system(size: 24))
                         .foregroundColor(AppTheme.Colors.textTertiary)
-                
+                }
                 VStack(alignment: .leading, spacing: 2) {
                     Text(currentUser?.name ?? "")
                         .font(AppTheme.Typography.headline)
