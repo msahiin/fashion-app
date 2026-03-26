@@ -2,6 +2,7 @@ name: Kombin
 options:
   bundleIdPrefix: com.mehmet.kombin
   xcodeVersion: "15.0"
+  projectFormat: "0059"
 targets:
   Kombin:
     type: application
